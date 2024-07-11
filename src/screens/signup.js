@@ -88,7 +88,6 @@ function SignUp() {
 					onChange={onChange}
 					style={{ width: '27%' }}
 				></TextField>
-				<br />
 				<TextField
 					label='Email'
 					variant='outlined'
@@ -97,9 +96,8 @@ function SignUp() {
 					name='email'
 					value={creds.email}
 					onChange={onChange}
-					style={{ width: '27%' }}
+					style={{ marginTop: '20px', width: '27%' }}
 				></TextField>
-				<br />
 				<TextField
 					label='Password'
 					variant='outlined'
@@ -108,29 +106,19 @@ function SignUp() {
 					name='password'
 					value={creds.password}
 					onChange={onChange}
-					style={{ width: '27%' }}
+					style={{ marginTop: '20px', width: '27%' }}
 				></TextField>
-				<br />
 				<TextField
-					label='Password'
+					label='Confirm Password'
 					variant='outlined'
 					type='password'
 					id='cnfpassword'
 					name='cnfpassword'
 					value={creds.cnfpassword}
 					onChange={onChange}
-					style={{ width: '27%' }}
+					style={{ marginTop: '20px', width: '27%' }}
 				></TextField>
-				<br />
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						width: '27%',
-						height: '56px',
-						gap: '5%',
-					}}
-				>
+				<div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', width: '27%', height: '56px', gap: '5%' }}>
 					<Button variant='contained' type='submit' style={{ width: '50%', height: '100%' }}>
 						Sign Up
 					</Button>

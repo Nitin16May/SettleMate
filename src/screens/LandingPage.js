@@ -42,6 +42,18 @@ function LandingPage() {
 				toast.success('Welcome back!');
 				localStorage.removeItem('welcome');
 			}
+			if (localStorage.getItem('forcedLogOut')) {
+				toast.error('Session Expired Login Again!');
+				localStorage.removeItem('forcedLogOut');
+			}
+			if (localStorage.getItem('reset')) {
+				toast.success('Password Reset Link sent to your email!');
+				localStorage.removeItem('reset');
+			}
+			if (localStorage.getItem('changePass')) {
+				toast.success('Password Updated!');
+				localStorage.removeItem('changePass');
+			}
 		}
 		authorize();
 		// eslint-disable-next-line react-hooks/exhaustive-deps

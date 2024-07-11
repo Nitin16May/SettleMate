@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { Typography } from '@mui/material';
 
 function Login() {
 	let navigate = useNavigate();
@@ -23,14 +24,13 @@ function Login() {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+		const response = await fetch(`${process.env.REACT_APP_API_URL}/forgotPassword`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				email: creds.email,
-				password: creds.password,
 			}),
 		});
 		const json = await response.json();
@@ -39,15 +39,9 @@ function Login() {
 				toast.error(error.msg, {});
 			});
 		} else {
-			localStorage.setItem('authToken', json.authToken);
-			localStorage.setItem('welcome', true);
+			localStorage.setItem('reset', true);
 			navigate('/');
 		}
-	};
-
-	const signUp = async e => {
-		e.preventDefault();
-		navigate('/signup');
 	};
 
 	return (
@@ -63,6 +57,18 @@ function Login() {
 					height: '100%',
 				}}
 			>
+				<Typography
+					label='Email'
+					variant='h5'
+					type='text'
+					id='email'
+					name='email'
+					value={creds.email}
+					onChange={onChange}
+					style={{ textAlign: 'center', width: '27%' }}
+				>
+					RESET PASSWORD LINK
+				</Typography>
 				<TextField
 					label='Email'
 					variant='outlined'
@@ -71,29 +77,11 @@ function Login() {
 					name='email'
 					value={creds.email}
 					onChange={onChange}
-					style={{ width: '27%' }}
-				></TextField>
-				<TextField
-					label='Password'
-					variant='outlined'
-					type='password'
-					id='password'
-					name='password'
-					value={creds.password}
-					onChange={onChange}
 					style={{ marginTop: '20px', width: '27%' }}
 				></TextField>
-				<div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', width: '27%', height: '56px', gap: '5%' }}>
-					<Button variant='contained' type='submit' style={{ width: '50%', height: '100%' }}>
-						Login
-					</Button>
-					<Button variant='outlined' onClick={signUp} style={{ width: '50%', height: '100%' }}>
-						Sign Up
-					</Button>
-				</div>
 				<Button
-					variant='outlined'
-					onClick={() => navigate('/forgotPassword')}
+					variant='contained'
+					type='submit'
 					style={{
 						marginTop: '20px',
 						width: '27%',
@@ -103,6 +91,14 @@ function Login() {
 				>
 					Forgot Password
 				</Button>
+				<div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', width: '27%', height: '56px', gap: '5%' }}>
+					<Button variant='outlined' onClick={() => navigate('/login')} style={{ width: '50%', height: '100%' }}>
+						Login
+					</Button>
+					<Button variant='outlined' onClick={() => navigate('/signup')} style={{ width: '50%', height: '100%' }}>
+						Sign Up
+					</Button>
+				</div>
 			</form>
 		</div>
 	);
